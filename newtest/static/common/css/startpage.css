@@ -1,0 +1,48 @@
+
+
+  html {
+    font-family: GillSans, Calibri, Trebuchet, sans-serif;
+  }
+
+#image-slider{
+	width:600px;
+
+}
+
+#add{
+	height:80px;
+	width:100%;
+	margin-left:0.1px;
+}
+
+#empty{
+	height:50px;
+}
+
+#add-button{
+	position:absolute;
+	top:60px;
+	right:100px;
+}
+
+#logo{
+	position:absolute;
+	top:0px;
+	left:40px;
+}
+#title{
+	position:absolute;
+	top:5px;
+	left:20px;
+}
+
+.slides {
+    border-style: solid;
+    border-width: 10px;
+    border-color: black;
+}
+
+nav{
+	height:50px;
+	line-height: 50px;
+}

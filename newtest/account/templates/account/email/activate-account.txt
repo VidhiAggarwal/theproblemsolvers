@@ -1,0 +1,9 @@
+Hi {{ u.username }}
+
+We have received a request from you to activate account.
+Copy paste this link in the address bar or click on this link to continue.
+
+http://127.0.0.1:8000{% url 'account:activate-account' id=u.id otp=otp %}
+
+Cheers
+The Problem Solvers

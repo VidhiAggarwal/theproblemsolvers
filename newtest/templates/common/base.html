@@ -1,0 +1,23 @@
+{% load staticfiles %}
+{% load material_form %}
+<html>
+    <head>
+    {% include 'material/includes/material_css.html' %}
+    <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
+        <title> {% block page_title %} Login {% endblock %} </title>
+        <link href="{% static 'common/css/base.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        {% block extrahead %} {% endblock %}
+    </head>
+    <body>
+        {% include "common/messages_display.html" %}
+        <div class = "container">
+        {% block content %} {% endblock %}
+        </div>
+        <script src="{% static 'common/js/jquery-2.2.1.min.js' %}"></script>
+        {% include 'material/includes/material_js.html' %}
+        {% block scripts %} {% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,56 @@
+ {% extends 'common/base.html' %}
+ {% block page_title %} Welcome {% endblock %}
+ {% load static %}
+
+  {% block extrahead %} 
+  <link href="{% static 'account/css/loggedin.css' %}" rel="stylesheet">
+  {% endblock %}
+
+  {% block content %}
+   <nav>
+    <div class="nav-wrapper  blue-grey darken-2">
+      <a href="#" class="brand-logo"><h5>The Problem Solvers</h5>
+      <h6>Because every problem has a solution</h6></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+        <li><div class="row"> <div class="col l6 right-align">{% if object.profile_pic %}<img src ='{{object.profile_pic.url}}' width="64x" height="64px" class='img-responsive'/>
+   {% endif %}</div><div class="col l6"><div id="username"><h6> Welcome {{ object.first_name }}</h6></div></div></div></li>
+        <li><a href="{% url "logout" %}"><i class="tiny material-icons left">face</i>Logout</a></li>
+        <li><a href="{% url "postIssue:all" %}" ><i class="tiny material-icons left">list</i>All Issues</a></li>
+        <li><a href="{% url "startpage" %}" ><i class="tiny material-icons left">list</i>Homepage</a></li>
+
+      </ul>
+    </div>
+    </nav>
+
+
+    <div id="add" class= "row">
+      <div class="right-align"><a href = "{% url "postIssue:add-issue" %}"<a class="btn-floating btn-large waves-effect waves-black"><i class="large material-icons">+</i></a></a></div>
+    </div>
+
+  <div class= "row">
+  <div><h3>MY POSTS</h3> 
+            {% for i in q_list %}
+            <div class = "blue-grey lighten-5  black-text"><h5>{{ i.id }} <a href = '{{ i.get_absolute_url }}'>{{ i.title }}</a></h5>
+            <div class="row">
+            <div class= "col l4">
+            {%  if i.image %}
+            <img src = '{{ i.image.url }}' height="100px" width="200px" class ='img-responsive'>
+            {% endif %}
+            </div>
+            <div class="col l6"> 
+            raised by {{ i.raised_by }}<br> 
+            Last Checked : {{ i.last_checked | timesince }}<br><br>
+            </div>
+            <div class="col l2"><a href="{% url "postIssue:edit" id=i.id %}"><i class="tiny material-icons left">mode_edit</i>Edit</a></div> 
+            </div>
+            </div>
+            {% endfor %}</div>
+
+    
+
+
+  </div>
+
+
+ {% endblock %}

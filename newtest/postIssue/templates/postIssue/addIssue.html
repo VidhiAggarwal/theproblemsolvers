@@ -1,0 +1,23 @@
+ {% extends 'common/base.html' %}
+ {% load material_form %}
+ {% block page_title %} Post A Challenge {% endblock %}
+
+ {% block content %}
+ {{ error }}
+ <div class="container">
+ <div class = "row">
+ 	<div class = "col s12 m12 l10 offset-l1">
+
+ 		<h4>POST A CHALLENGE</h4>
+ 		<form method="POST" action="{% url "postIssue:add-issue" %}" enctype="multipart/form-data">
+ 			{% csrf_token %}
+ 			<!-- {{ f.as_p}} -->
+ 			{% form form=f %}{% endform %}
+ 			<button type="submit" id ="login-btn" name="submit" value="Login" class="btn waves-effect waves-light"> Post Challenge !! </button>
+ 		</form>
+ 	</div>
+ </div>
+ </div>
+ {% endblock %}
+
+ <!--<form action="{% url "add-issue" %}" method="POST"> -->

@@ -1,0 +1,11 @@
+ {% extends 'common/base.html' %}
+ {% block title %} create user {% endblock %}
+ {% block content %}
+
+ <form action = '/account/save/' method='POST'>
+     {% csrf_token %}
+     username :<input type="text" name="username">
+     password :<input type="text" name="password">
+     <input type="submit" name="submit" value="create_user">
+ </form>
+ {% endblock %}
