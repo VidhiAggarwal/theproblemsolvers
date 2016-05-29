@@ -9,6 +9,7 @@
  	<div class = "col s12 m12 l10 offset-l1">
 
  		<h4>POST A CHALLENGE</h4>
+ 		<p class="red-text"> "all fields except image field are compulsary"</p>
  		<form method="POST" action="{% url "postIssue:add-issue" %}" enctype="multipart/form-data">
  			{% csrf_token %}
  			<!-- {{ f.as_p}} -->

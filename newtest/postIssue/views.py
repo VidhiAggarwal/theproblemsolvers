@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+import pdb
 
 # Create your views here.
 
@@ -290,18 +291,22 @@ def delete_issue(request, id=None):
     messages.success(request, "Successfully Deleted")
     return redirect('postIssue:all')
 
-#@require_http_methods(['GET', 'POST'])   #anushray bhaiya
+@require_http_methods(['GET', 'POST'])   #anushray bhaiya
 @login_required
 def add_issue(request):
     if request.method == 'GET':
         f = PostAnIssue();
         return render(request, 'postIssue/addIssue.html', {'f':f});
     else:
-        f=PostAnIssue(request.POST,request.FILES);
+        f=PostAnIssue(request.POST,request.FILES)
+        pdb.set_trace()
         if f.is_valid():
-            issue_object=f.save(commit=False);
-            issue_object.raised_by=request.user;
-            issue_object.save();
+            issue_object=f.save(commit=False)
+            issue_object.raised_by=request.user
+            issue_object.save()
+            return HttpResponse('ok')
+        else:
+            return render(request, 'postIssue/addIssue.html', {'f': f})
     return render(request, 'postIssue/issue_posted.html', {'u':request.user})
     #return redirect('postIssue:all');
 
