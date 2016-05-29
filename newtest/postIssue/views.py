@@ -11,7 +11,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-import pdb
 
 # Create your views here.
 
@@ -299,7 +298,6 @@ def add_issue(request):
         return render(request, 'postIssue/addIssue.html', {'f':f});
     else:
         f=PostAnIssue(request.POST,request.FILES)
-        pdb.set_trace()
         if f.is_valid():
             issue_object=f.save(commit=False)
             issue_object.raised_by=request.user
