@@ -136,7 +136,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 AUTH_USER_MODEL = 'postIssue.MyUser'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'account:login'
 
 #email settings
 

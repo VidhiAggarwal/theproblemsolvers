@@ -1,10 +1,11 @@
 from django.conf.urls import url, include
-from .views import all_users, add_user, save_user, after_login_home, login, logout, forgot_password, reset_password, signup, activate
+from .views import after_login_home, login, logout, forgot_password, reset_password, signup, activate, edit_profile
 
 urlpatterns = [
-    url(r'^all/$', all_users),
-    url(r'^add/$', add_user),
-    url(r'^save/$', save_user),
+    # url(r'^all/$', all_users),
+    # url(r'^add/$', add_user),
+    url(r'^(?P<id>[0-9]+)/edit/$', edit_profile , name = "edit"),
+    # url(r'^save/$', save_user),
     url(r'^(?P<id>\d+)/home/$', after_login_home, name="home"),
     url(r'^login/$',login, name="login"),
     url(r'^logout/$',logout, name="logout"),

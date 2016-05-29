@@ -1,4 +1,4 @@
-{% extends 'common/base.html' %}
+{% extends 'postIssue/common_pi.html' %}
 {% load staticfiles %}    
     {% block extrahead %}
         <link href = "{% static 'postIssue/css/base.css' %}" rel="stylesheet">
@@ -6,8 +6,10 @@
 
     {% block page_title %}{{object.id}}#{{object.category}}{% endblock %}
 
-            {% block content %}
-            <div id = "question"class = "blue-grey lighten-5 col l8 offset-l2">
+            {% block scontent %}
+        
+            <div style="width:70%; margin:0 auto">
+            <div id = "question"class = "grey lighten-5 col l8 offset-l2">
             <div class = "row blue-grey darken-2">
             <div class = "col l6">
             <h4 class=" white-text left-align ">{{ object.title }}</h4 >
@@ -54,13 +56,13 @@
             <div class = "row blue-grey darken-2">
             <div class = "col l8 left-align"><h5 class="white-text">SOLUTIONS</h5></div>
             <div class = "col l4 right-align">
-                <a href = "{% url "postIssue:add-solution" i_id=object.id %}" ><h6 class="white-text">POST SOLUTION<h6></a>
+                <a href = "{% url "postIssue:add-solution" i_id=object.id %}" ><h6 class="white-text">POST SOLUTION</h6></a>
             </div>
             </div>
 
              <ul class="collection">
              {% for s in s_list %}
-            <li class="collection-item avatar blue-grey lighten-5">
+            <li class="collection-item avatar grey lighten-5">
 
             <p>{{ s.text}}<br><br></p>
             <div class="row">
@@ -78,7 +80,7 @@
             {% endfor %}
             </ul>
             </div>
-
+            </div>
             
             {% endblock %}
         

@@ -11,7 +11,7 @@
     
     {% block content %}
 
-    <div class ="blue-grey lighten-5">
+    <div class ="grey lighten-2">
     <div class = "head blue-grey darken-3">
     <nav>
       <div class="nav-wrapper blue-grey darken-3">
@@ -20,7 +20,7 @@
         <li><a href="{% url "account:login" %}"><i class="tiny material-icons left">perm_identity</i>Login</a></li>
         <li><a href="{% url "account:signup" %}"><i class="tiny material-icons left">face</i>Signup</a></li>
         <li><a href="{% url "postIssue:all" %}" ><i class="tiny material-icons left">list</i>All Issues</a></li>
-
+        <li><a href="{% url "postIssue:solved" %}" ><i class="tiny material-icons left">list</i>Resolved</a></li>
       </ul>
       </div>
     </nav>  
@@ -29,12 +29,12 @@
     <div id="add" class= "row blue-grey">
       <div id="logo"><img src="/mymedia/pics/logo.jpg" width="150px" height="130px"> </div>
       <div id= "title" class ="col l5 offset-l2"><p><h3 class="white-text"> The Problem Solvers</h3><h6 class="white-text">Because Every Problem Has A Solution</h6></p></div>
-    <div id="add-button"><a href = "{% url "postIssue:add-issue" %}"<a class="btn-floating btn-large waves-effect waves"><i class="large material-icons blue-grey darken-3">+</i></a></a></div>
+    <div id="add-button"><a href = "{% url "postIssue:add-issue" %}"<a class="btn-floating btn-large waves-effect waves"><i class="large material-icons blue-grey darken-3">+</i></a><span class="white-text"> Post A Challenge</span></a></div>
     </div>
     </div>
 
 
-    <div id="empty" class="blue-grey lighten-5"></div>
+    <div id="empty" class="grey lighten-2"></div>
 
 
     <div class="row">

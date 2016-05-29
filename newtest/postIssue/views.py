@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 @require_GET
 @login_required
 def all_issues(request): 
-    today = timezone.now().date()
+    #today = timezone.now().date()
     #queryset_list = Issue.objects.active()
     upvote_list = [] 
     # list containing all the upvote objects corresponding to a particular post
@@ -52,10 +52,44 @@ def all_issues(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
-    for q in queryset_list:
-        post_id=q.id
-    context = {'i_list':queryset, 'upvote_list': upvote_list, 'upvote_query_list': upvote_query_list, 'today':today}
+    context = {'i_list':queryset, 'upvote_list': upvote_list, 'upvote_query_list': upvote_query_list}
     return render(request, 'postIssue/base.html', context)
+
+
+@require_GET
+@login_required
+def solved_issues(request): 
+    upvote_list = [] 
+    # list containing all the upvote objects corresponding to a particular post
+    upvote_query_list = []
+    queryset_list = Issue.objects.all().filter(isSolved='True')
+
+    for query in queryset_list:
+        upvote_query = Upvote.objects.filter(issue=query)
+        upvote_query_list.append(upvote_query)
+        upvote_list.append(upvote_query.count())
+
+    query = request.GET.get('q')
+    if query:
+        queryset_list=queryset_list.filter(
+            Q(title__icontains=query)|
+            Q(text__icontains=query)|
+            Q(raised_by__username__icontains=query)
+            ).distinct()
+
+    paginator = Paginator(queryset_list,5)
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        queryset = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        queryset = paginator.page(paginator.num_pages)
+    context = {'i_list':queryset, 'upvote_list': upvote_list, 'upvote_query_list': upvote_query_list}
+    return render(request, 'postIssue/solved.html', context)
+
 
 
 @require_GET
@@ -265,7 +299,7 @@ def add_issue(request):
     else:
         f=PostAnIssue(request.POST,request.FILES);
         if f.is_valid():
-            issue_    =f.save(commit=False);
+            issue_object=f.save(commit=False);
             issue_object.raised_by=request.user;
             issue_object.save();
     return render(request, 'postIssue/issue_posted.html', {'u':request.user})

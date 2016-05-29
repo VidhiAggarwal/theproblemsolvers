@@ -1,6 +1,6 @@
- {% extends 'common/base.html' %}
+ {% extends 'postIssue/common_pi.html' %}
  {% block page_title %} Issue Successfully Posted {% endblock %}
- {% block content %}
+ {% block scontent %}
   Hey {{ u.username }}. Your issue has succesfully been posted. 
   <a href = "{% url "postIssue:all" %}" </a> Click to check ..
  

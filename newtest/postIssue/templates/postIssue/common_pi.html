@@ -1,0 +1,28 @@
+ {% extends 'common/base.html' %}
+ {% load static %}
+
+ {% block content %}
+     <div class ="grey lighten-2" style="height:100%">
+     <div class = "head blue-grey darken-3">
+    <nav>
+      <div class="nav-wrapper blue-grey darken-3">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+        <li><li><a href="{% url "postIssue:add-issue" %}">+ Post A Challenge</span></a></li>
+   </li>
+        <li><a href="{% url "account:logout" %}"><i class="tiny material-icons left">face</i>Logout</a></li>
+        <li><a href="{% url "startpage" %}"><i class="tiny material-icons left">list</i>Startpage</a></li>
+     </ul>
+      </div>
+    </nav>
+
+      <div style="position:absolute;top:0px; left:20x"><img src="/mymedia/pics/logo.jpg" width="150px" height="125px"> </div>
+      <div style ="position:absolute; top:10px; left:250px;"><p><h3 class="white-text">The Problem Solvers</h3><h6 class="white-text">"Because Every Problem Has A Solution"</h6></p></div>
+      </div>
+
+      <div id="empty" style="height:60px" class="blue-grey darken-1"></div>
+      <div id="empty" style="height:30px" class="grey lighten-2"></div>
+
+    {% block scontent %}{% endblock %}
+    </div>
+    {% endblock %}

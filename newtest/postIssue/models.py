@@ -29,6 +29,7 @@ class Issue(models.Model):
     #height_field = models.IntegerField(default=0)
     #width_field = models.IntegerField(default=0)
     isChecked = models.BooleanField(default=False)
+    isSolved = models.BooleanField(default=False)
     #publish = models.DateField(auto_now=False, auto_now_add=False)
     created_on = models.DateTimeField(auto_now=True)
     last_checked = models.DateTimeField(auto_now_add=True)

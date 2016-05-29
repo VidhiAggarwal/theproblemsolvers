@@ -40,23 +40,23 @@ def login(request):
 
 def logout(request):
     auth_logout(request);
-    return redirect(reverse("login"))
+    return redirect(reverse("account:login"))
 
-@csrf_exempt
-def all_users(request):
-    return render(request, 'account/index.html');
+# @csrf_exempt
+# def all_users(request):
+#     return render(request, 'account/index.html');
 
-@require_GET
-def add_user(request):
-    return render(request, 'account/createuser.html');
+# @require_GET
+# def add_user(request):
+#     return render(request, 'account/createuser.html');
 
-@require_POST
-def save_user(request):
-    username = request.POST.get('username' , '')
-    if not username:
-        raise Http404
-    u = MyUser.objects.create(username = username);
-    return HttpResponse('ok');
+# @require_POST
+# def save_user(request):
+#     username = request.POST.get('username' , '')
+#     if not username:
+#         raise Http404
+#     u = MyUser.objects.create(username = username);
+#     return HttpResponse('ok');
 
 @login_required
 def after_login_home(request,id):
@@ -137,6 +137,24 @@ def signup(request):
             message.send()
 
             return render(request, 'account/activate-account-sent.html', {'u':user})
+
+@require_http_methods(['GET', 'POST'])  
+@login_required
+def edit_profile(request, id=None):
+    user_obj = get_object_or_404(MyUser, id=id);
+    print(user_obj.id)
+    print(id)
+    if user_obj.id!=id:
+        raise Http404;
+    if request.method == 'GET':
+        f = SignUpForm(instance=user_obj)
+    else:
+        f=SignUpForm(request.POST, request.FILES, instance=user_obj);
+        if f.is_valid():
+            user =f.save();
+            return HttpResponse('ok');
+    context = {'i_id':user_obj.id, 'f':f}  
+    return render(request, 'account/editprofile.html', context); 
 
 
 @require_GET
