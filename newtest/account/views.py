@@ -122,6 +122,8 @@ def signup(request):
         if not f.is_valid():
             return render(request, 'account/signup.html', {'f': f})
         else:
+            get_hostname = request.get_host()
+            print(type(get_hostname))
             user = f.save(commit=False);
             user.set_password(f.cleaned_data['password']);
             user.is_active = False
@@ -136,7 +138,7 @@ def signup(request):
             #message.attach_alternative(html_body, 'text/html')
             message.send()
 
-            return render(request, 'account/activate-account-sent.html', {'u':user})
+            return render(request, 'account/activate-account-sent.html', {'u':user, 'hostname': get_hostname})
 
 @require_http_methods(['GET', 'POST'])  
 @login_required
